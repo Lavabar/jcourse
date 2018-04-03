@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class Cells {
-    final static double cell_rad = 0.5;
+    final static double CELL_RAD = 0.5;
 
     int w;
     int h;
@@ -15,21 +15,14 @@ public class Cells {
         flag = 1;
     }
 
-    public void zeroOld() {
-        int opp;
-        opp = (flag == 1)? 0 : 1;
-        cells[opp] = new boolean[w * h];
-    }
-
     public void renewCells() {
         Random random = new Random();
-        for (int y = 0; y < h; y++) {
-            for (int x = 0; x < w; x++) {
-                cells[0][y * w + x] = random.nextBoolean();
-                cells[1][y * w + x] = cells[0][y * w + x];
+        for (int i = 0; i < h * w; i++) {
+                cells[0][i] = random.nextBoolean();
+                cells[1][i] = cells[0][i];
             }
-        }
     }
+
     private boolean dotProduct(int x, int y) {
         int alive;
         alive = 0;
@@ -69,7 +62,7 @@ public class Cells {
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
                 if (cells[opp][y * w + x]) {
-                    StdDraw.filledCircle(x, y, cell_rad);
+                    StdDraw.filledCircle(x, y, CELL_RAD);
                 }
             }
         }
